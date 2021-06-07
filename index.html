@@ -17,6 +17,7 @@
     <link href="css/aos.css?ver=1.2.0" rel="stylesheet">
     <link href="css/main.css?ver=1.2.0" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.1.0/dist/leaflet-measure.css" />
     <noscript>
       <style type="text/css">
         [data-aos] {
@@ -60,7 +61,7 @@
                             <p data-aos="fade-left" data-aos-delay="100">Survey Engineer & Web GIS Developer</p>
                             <div class="d-print-none" data-aos="fade-left" data-aos-delay="200">
                                 <a class="btn btn-success shadow-sm mt-1" href="#contact">Contact</a>
-                                 <a class="btn btn-primary shadow-sm mt-1" href="http://161.200.80.206/uavgis/">Transcribs</a></div>
+                                <a class="btn btn-danger shadow-sm mt-1" href="https://drive.google.com/file/d/1vWDEeBZI7dentPQp8NanqF3gC752Xphk/view?usp=sharing">Transcript</a>
                                 <a class="btn btn-warning shadow-sm mt-1" href="http://161.200.80.206/uavgis/">My Senior Project</a></div>
                         </div>
                     </div>
@@ -275,25 +276,53 @@
     <script src="scripts/aos.js?ver=1.2.0"></script>
     <script src="scripts/main.js?ver=1.2.0"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="scripts/leaflet-measure.min.js"></script>
     <script>
-        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-
-        var streets = L.tileLayer(mbUrl, {
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            attribution: mbAttr
+        var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
         });
+
+        var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+        });
+
+        var temp = L.layerGroup();
+
+        var marker = L.marker([9.127386, 99.323787]).addTo(temp);
+        marker.bindPopup(`<p>My House</p><p>Phone:0901759679</p><p>Email:boat_255@hotmail.com</p><p>Address:124/111, Watpo-Bangyai road, Makham Tia, Muang Suratthani, Suratthani</p>`).openPopup();
+        baseMaps = {
+            'GoogleStreets': googleStreets,
+            'GoogleSat': googleSat,
+        }
+
+        var overlayMaps = {
+            'My House': temp
+        };
+
         var mymap = L.map('mapid', {
             center: [9.127386, 99.323787],
             zoom: 15,
-            layers: [streets]
+            layers: [googleStreets, temp]
         });
-        var marker = L.marker([9.127386, 99.323787]).addTo(mymap);
-        marker.bindPopup(`<p>My House</p><p>Phone:0901759679</p><p>Email:boat_255@hotmail.com</p><p>Address:124/111, Watpo-Bangyai road, Makham Tia, Muang Suratthani, Suratthani</p>`).openPopup();
+
+        // measureControl
+        var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'kilometers',
+            secondaryLengthUnit: 'meters',
+            primaryAreaUnit: 'sqmeters',
+            activeColor: '#b41919',
+            completedColor: '#b41919'
+        });
+
+        measureControl.addTo(mymap);
+        // scale bar
+        L.control.scale({
+            imperial: false
+        }).addTo(mymap);
+
+        L.control.layers(baseMaps, overlayMaps).addTo(mymap);
     </script>
 
 </body>
