@@ -70,8 +70,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h2 class="h3 mb-3">About Me</h2>
-                            <p>Hello! I’m Wongsaton Netpuggana. I am passionate about Web GIS , Geomatic Engineering and Spatail analysis . I am a skilled Back-end Developer tools such as Python(Pandas,Geo-Pandas) ,PostgresSQL(Postgis,pgrouting) and JavaScript
-                                and Front-end Developer tools such as leaflet.js and bootstarb.I am interesting about AI,Machine Learning and Computer Vision.</p>
+                            <p>Hello, I’m Wongsaton Netpuggana. I am passionate about Web GIS, Geomatic Engineering, and Spatial Analysis. I am a skilled Back-end Developer with tools such as Python (Pandas, Geo-Pandas), PostgresSQL (PostGIS, pgRouting), and JavaScript, and Front-end Developer with tools such as Leaflet.js and Bootstrap. I am interested in AI, Machine Learning, and Computer Vision.
+                                and Front-end Developer tools such as leaflet.js and bootstarp.I am interesting about AI,Machine Learning and Computer Vision.</p>
                         </div>
                         <div class="col-md-5 offset-md-1">
                             <div class="row mt-2">
@@ -97,7 +97,7 @@
                                     <div class="pb-1">Address</div>
                                 </div>
                                 <div class="col-sm-8">
-                                    <div class="pb-1 text-secondary">124/111, Watpo-Bangyai road, Makham Tia, Muang Suratthani, Suratthani</div>
+                                    <div class="pb-1 text-secondary">366 Soi Krung Thonburi 6, Bang Lamphu Lang Sub-district, Klong San District, Bangkok.</div>
                                 </div>
                             </div>
                         </div>
@@ -161,16 +161,25 @@
                     <div class="timeline">
                         <div class="timeline-card timeline-card-primary card shadow-sm">
                             <div class="card-body">
+                                <div class="h5 mb-1">Survey Engineer <span class="text-muted h6">at AAPICO ITS Co., Ltd.</span></div>
+                                <div class="text-muted text-small mb-2">Febrary, 2023 - Present</div>
+                                <div>Generated map tiles using Mapbox/Tippecanoe from GeoJSON data.</div>
+                                <div>Created routing API using GraphHopper from OpenStreetMap (OSM).</div>
+                                <div>Developed QGIS plugin for quality control of Point of Interest (POI) data.</div>
+                            </div>
+                        </div>
+                        <div class="timeline-card timeline-card-primary card shadow-sm">
+                            <div class="card-body">
                                 <div class="h5 mb-1">Survey Engineer <span class="text-muted h6">at Infraplus Co., Ltd.</span></div>
-                                <div class="text-muted text-small mb-2">November, 2021 - Present</div>
-                                <div>Surveyed and Proceesed Survey data,Writed progress report,Developed code to prepare and procees data by Python.</div>
+                                <div class="text-muted text-small mb-2">November, 2021 - Febrary, 2023</div>
+                                <div>Surveyed and Proceesed Survey data,Wrote progress report,Developed code to prepare and procees data by Python.</div>
                             </div>
                         </div>
                         <div class="timeline-card timeline-card-primary card shadow-sm">
                             <div class="card-body">
                                 <div class="h5 mb-1">Part time Web GIS Developer <span class="text-muted h6">at Chulalongkorn</span></div>
                                 <div class="text-muted text-small mb-2">May, 2021 - July, 2021</div>
-                                <div>Developed frontend web map  for monitoring fire hotspot by JavaScript,Leaflet.JS,HTML,PHP and CSS .</div>
+                                <div>Developed frontend a web map for monitoring fire hotspots using JavaScript,Leaflet.js,HTML,PHP, and CSS .</div>
                                 <a href="http://tamfire.net/"> http://tamfire.net </a>
                             </div>
                         </div>
@@ -238,6 +247,8 @@
                         <div class="col">
                             <div class="mt-2">
                                 <h3 class="h6">Address</h3>
+                                <div class="pb-2 text-secondary">366 Soi Krung Thonburi 6, Bang Lamphu Lang Sub-district, Klong San District, Bangkok</div>
+                                <h3 class="h6">Registered Address</h3>
                                 <div class="pb-2 text-secondary">124/111, Watpo-Bangyai road, Makham Tia, Muang Suratthani, Suratthani</div>
                                 <h3 class="h6">Phone</h3>
                                 <div class="pb-2 text-secondary">0901759679</div>
@@ -311,19 +322,19 @@
 
         var temp = L.layerGroup();
 
-        var marker = L.marker([9.127386, 99.323787]).addTo(temp);
-        marker.bindPopup(`<p>My House</p><p>Phone:0901759679</p><p>Email:boat_255@hotmail.com</p><p>Address:124/111, Watpo-Bangyai road, Makham Tia, Muang Suratthani, Suratthani</p>`).openPopup();
+        var marker = L.marker([13.718789669379547, 100.50136474845368]).addTo(temp);
+        marker.bindPopup(`<p>Current Address</p><p>Phone:0901759679</p><p>Email:boat_255@hotmail.com</p><p>Address:366 Soi Krung Thonburi 6, Bang Lamphu Lang Sub-district, Klong San District, Bangkok 10600, Thailand.</p>`).openPopup();
         baseMaps = {
             'GoogleStreets': googleStreets,
             'GoogleSat': googleSat,
         }
 
         var overlayMaps = {
-            'My House': temp
+            'Current Address': temp
         };
 
         var mymap = L.map('mapid', {
-            center: [9.127386, 99.323787],
+            center: [13.718789669379547, 100.50136474845368],
             zoom: 15,
             layers: [googleStreets, temp]
         });
